@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <title>All flights to a specific airport</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Flights to Airport</h1>
+            </div>
+            <div class="col-md-4 col-md-offset-4" style="padding:20px 0">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Airline</th>
+                    <th>Code</th>
+                    <th>Airport</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="flight : ${flights}">
+                    <td th:text="${flight.flightNumber}"></td>
+                    <td th:text="${flight.getAirline}"></td>
+                    <td th:text="${flight.airport.getCode()}"></td>
+                    <td th:text="${flight.airport.getName()}"></td>
+                    <td>
+                        <span sec:authorize="hasAuthority('ADMIN')">
+                            <a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>
+                            <a th:href="@{/deleteflight/{id}(id=${flight.id})}" class="btn btn-sm btn-danger">Delete</a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

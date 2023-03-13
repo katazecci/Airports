@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface AirportRepository extends CrudRepository<Airport, Long> {
+public interface FlightRepository extends CrudRepository<Flight, Long> {
 
-	List<Airport> findByName(String name);
+	List<Flight> findByAirport(Long airportId);
 
 }

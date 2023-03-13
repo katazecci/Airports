@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <title>Flights</title>
+</head>
+<body>
+
+	<div class="container">
+		<div class="col-md-4">
+   <a th:href="@{/airportlist}">All Airports</a>
+			<h1>Flights</h1>
+		</div>
+
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+
+	<div class="col-md-4" style="padding:20px 0">
+		<span sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/addflight}" class="btn btn-sm btn-primary">Add new flight</a>
+		</span>
+	</div>
+
+	<div class="col-md-12">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Flight number</th>
+					<th>Departure airport</th>
+					<th>Airline</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="flight : ${flights}">
+					<td th:text="${flight.flightNumber}">Flight number</td>
+					<td th:text="${flight.airport.name}">Destination airport</td>
+					<td th:text="${flight.airline}">Airline</td>
+					<td>
+						<span sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>
+							<a th:href="@{/deleteflight/{id}(id=${flight.id})}" class="btn btn-sm btn-danger">Delete</a>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html> 
