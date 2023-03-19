@@ -25,6 +25,7 @@
                     <th>Airline</th>
                     <th>Code</th>
                     <th>Airport</th>
+                    <th>Gate</th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                     <td th:text="${flight.getAirline}"></td>
                     <td th:text="${flight.airport.getCode()}"></td>
                     <td th:text="${flight.airport.getName()}"></td>
+                    <td th:text="${flight.getGate()}"></td>
                     <td>
                         <span sec:authorize="hasAuthority('ADMIN')">
                             <a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>

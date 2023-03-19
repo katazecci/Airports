@@ -8,4 +8,8 @@ public interface FlightRepository extends CrudRepository<Flight, Long> {
 
 	List<Flight> findByAirport(Long airportId);
 
+	List<Flight> findByAirline(String airline);
+
+	List<Flight> findByFlightNumber(String flightNumber);
+
 }

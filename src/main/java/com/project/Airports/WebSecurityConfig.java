@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests().requestMatchers("/css/**", "/signup", "/saveuser").permitAll() // Enable css when
 																									// logged out
 				.and().authorizeHttpRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/bookList", true).permitAll().and().logout().permitAll().and();
+				.defaultSuccessUrl("/airportlist", true).permitAll().and().logout().permitAll().and();
 
 		return http.build();
 	}

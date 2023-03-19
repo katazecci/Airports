@@ -6,11 +6,10 @@
     <title>Flights</title>
 </head>
 <body>
-
 	<div class="container">
 		<div class="col-md-4">
-   <a th:href="@{/airportlist}">All Airports</a>
-			<h1>Flights</h1>
+			<h1>All Flights</h1>
+			<h1><a th:href="@{/airportlist}">All Airports</a></h1>
 		</div>
 
 	<div class="col-md-4" style="padding:20px 0">
@@ -26,30 +25,34 @@
 	</div>
 
 	<div class="col-md-12">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Flight number</th>
-					<th>Departure airport</th>
-					<th>Airline</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="flight : ${flights}">
-					<td th:text="${flight.flightNumber}">Flight number</td>
-					<td th:text="${flight.airport.name}">Destination airport</td>
-					<td th:text="${flight.airline}">Airline</td>
-					<td>
-						<span sec:authorize="hasAuthority('ADMIN')">
-							<a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>
-							<a th:href="@{/deleteflight/{id}(id=${flight.id})}" class="btn btn-sm btn-danger">Delete</a>
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Flight number</th>
+				<th>Departure airport</th>
+                <th>Gate</th>
+				<th>Departure time</th>
+				<th>Airline</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="flight : ${flights}">
+				<td th:text="${flight.flightNumber}">Flight number</td>
+				<td th:text="${flight.airport.name}">Departure airport</td>
+                <td th:text="${flight.gate}">Gate</td>
+				<td th:text="${#temporals.format(flight.departureTime, 'HH:mm')}">Departure time</td>
+				<td th:text="${flight.airline}">Airline</td>
+				<td>
+					<span sec:authorize="hasAuthority('ADMIN')">
+						<a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>
+						<a th:href="@{/deleteflight/{id}(id=${flight.id})}" class="btn btn-sm btn-danger">Delete</a>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	</div>
 </div>
 </body>
-</html> 
+</html>

@@ -1,5 +1,7 @@
 package com.project.Airports;
 
+import java.time.LocalDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -28,91 +30,101 @@ public class AirportsApplication {
 			AppUserRepository userRepository) {
 		return (args) -> {
 
-			// Create and save airports
-			Airport newYorkAirport = new Airport("JFK", "John F. Kennedy International Airport");
-			airportRepository.save(newYorkAirport);
+			// Create and save airports and flights
 
-			Airport londonAirport = new Airport("LHR", "Heathrow Airport");
-			airportRepository.save(londonAirport);
+			Airport losAngelesAirport = airportRepository.save(new Airport("LAX", "Los Angeles International Airport"));
+			Airport dubaiAirport = airportRepository.save(new Airport("DXB", "Dubai International Airport"));
+			Airport beijingAirport = airportRepository
+					.save(new Airport("PEK", "Beijing Capital International Airport"));
+			Airport sydneyAirport = airportRepository.save(new Airport("SYD", "Sydney Airport"));
+			Airport torontoAirport = airportRepository
+					.save(new Airport("YYZ", "Toronto Pearson International Airport"));
+			Airport singaporeAirport = airportRepository.save(new Airport("SIN", "Singapore Changi Airport"));
+			Airport frankfurtAirport = airportRepository.save(new Airport("FRA", "Frankfurt Airport"));
 
-			Airport parisAirport = new Airport("CDG", "Charles de Gaulle Airport");
-			airportRepository.save(parisAirport);
+			// Flights from Los Angeles Airport
+			flightRepository.save(new Flight("American Airlines", losAngelesAirport, "AA456",
+					LocalDateTime.of(2023, 3, 15, 11, 30), "A1"));
+			flightRepository.save(new Flight("Delta Air Lines", losAngelesAirport, "DL789",
+					LocalDateTime.of(2023, 3, 15, 13, 45), "B2"));
+			flightRepository.save(new Flight("United Airlines", losAngelesAirport, "UA321",
+					LocalDateTime.of(2023, 3, 15, 16, 20), "C3"));
+			flightRepository.save(new Flight("Southwest Airlines", losAngelesAirport, "WN654",
+					LocalDateTime.of(2023, 3, 15, 18, 10), "D4"));
+			flightRepository.save(new Flight("JetBlue Airways", losAngelesAirport, "B6521",
+					LocalDateTime.of(2023, 3, 15, 21, 5), "E5"));
 
-			Airport losAngelesAirport = new Airport("LAX", "Los Angeles International Airport");
-			airportRepository.save(losAngelesAirport);
+			// Flights from Dubai International Airport
+			flightRepository
+					.save(new Flight("Emirates", dubaiAirport, "EK123", LocalDateTime.of(2023, 3, 15, 8, 30), "A1"));
+			flightRepository.save(
+					new Flight("Etihad Airways", dubaiAirport, "EY456", LocalDateTime.of(2023, 3, 15, 12, 45), "B2"));
+			flightRepository
+					.save(new Flight("Flydubai", dubaiAirport, "FZ789", LocalDateTime.of(2023, 3, 15, 15, 20), "C3"));
+			flightRepository
+					.save(new Flight("Air Arabia", dubaiAirport, "G9123", LocalDateTime.of(2023, 3, 15, 17, 10), "D4"));
+			flightRepository
+					.save(new Flight("Gulf Air", dubaiAirport, "GF321", LocalDateTime.of(2023, 3, 15, 22, 5), "E5"));
 
-			Airport dubaiAirport = new Airport("DXB", "Dubai International Airport");
-			airportRepository.save(dubaiAirport);
+			// Flights from Beijing Capital International Airport
+			flightRepository
+					.save(new Flight("Air China", beijingAirport, "CA123", LocalDateTime.of(2023, 3, 15, 9, 30), "A1"));
+			flightRepository.save(new Flight("China Eastern Airlines", beijingAirport, "MU456",
+					LocalDateTime.of(2023, 3, 15, 12, 45), "B2"));
+			flightRepository.save(new Flight("China Southern Airlines", beijingAirport, "CZ789",
+					LocalDateTime.of(2023, 3, 15, 16, 20), "C3"));
+			flightRepository.save(new Flight("Hainan Airlines", beijingAirport, "HU654",
+					LocalDateTime.of(2023, 3, 15, 18, 10), "D4"));
+			flightRepository.save(new Flight("Xiamen Airlines", beijingAirport, "MF6521",
+					LocalDateTime.of(2023, 3, 15, 21, 5), "E5"));
 
-			Airport beijingAirport = new Airport("PEK", "Beijing Capital International Airport");
-			airportRepository.save(beijingAirport);
+			// Flights for Sydney Airport
+			flightRepository
+					.save(new Flight("Qantas", sydneyAirport, "QF112", LocalDateTime.of(2023, 3, 15, 8, 45), "Gate 1"));
+			flightRepository.save(new Flight("Virgin Australia", sydneyAirport, "VA547",
+					LocalDateTime.of(2023, 3, 15, 11, 15), "Gate 2"));
+			flightRepository.save(
+					new Flight("Jetstar", sydneyAirport, "JQ202", LocalDateTime.of(2023, 3, 15, 14, 30), "Gate 3"));
+			flightRepository.save(
+					new Flight("Emirates", sydneyAirport, "EK414", LocalDateTime.of(2023, 3, 15, 18, 20), "Gate 4"));
+			flightRepository.save(new Flight("Singapore Airlines", sydneyAirport, "SQ221",
+					LocalDateTime.of(2023, 3, 15, 21, 5), "Gate 5"));
 
-			Airport sydneyAirport = new Airport("SYD", "Sydney Airport");
-			airportRepository.save(sydneyAirport);
+			// Flights for Toronto Airport
+			flightRepository.save(
+					new Flight("Air Canada", torontoAirport, "AC123", LocalDateTime.of(2023, 3, 15, 9, 10), "Gate 6"));
+			flightRepository.save(
+					new Flight("WestJet", torontoAirport, "WS456", LocalDateTime.of(2023, 3, 15, 12, 30), "Gate 7"));
+			flightRepository.save(new Flight("United Airlines", torontoAirport, "UA789",
+					LocalDateTime.of(2023, 3, 15, 15, 45), "Gate 8"));
+			flightRepository.save(new Flight("American Airlines", torontoAirport, "AA246",
+					LocalDateTime.of(2023, 3, 15, 19, 0), "Gate 9"));
+			flightRepository.save(new Flight("Delta Air Lines", torontoAirport, "DL369",
+					LocalDateTime.of(2023, 3, 15, 22, 15), "Gate 10"));
 
-			Airport torontoAirport = new Airport("YYZ", "Toronto Pearson International Airport");
-			airportRepository.save(torontoAirport);
+			// Flights for Singapore Airport
+			flightRepository.save(new Flight("Singapore Airlines", singaporeAirport, "SQ319",
+					LocalDateTime.of(2023, 3, 15, 6, 0), "Gate 11"));
+			flightRepository.save(new Flight("Qatar Airways", singaporeAirport, "QR841",
+					LocalDateTime.of(2023, 3, 15, 10, 20), "Gate 12"));
+			flightRepository.save(new Flight("Emirates", singaporeAirport, "EK402",
+					LocalDateTime.of(2023, 3, 15, 14, 15), "Gate 13"));
+			flightRepository.save(new Flight("Cathay Pacific", singaporeAirport, "CX712",
+					LocalDateTime.of(2023, 3, 15, 18, 30), "Gate 14"));
+			flightRepository.save(new Flight("Thai Airways", singaporeAirport, "TG424",
+					LocalDateTime.of(2023, 3, 15, 22, 45), "Gate 15"));
 
-			Airport singaporeAirport = new Airport("SIN", "Singapore Changi Airport");
-			airportRepository.save(singaporeAirport);
-
-			Airport frankfurtAirport = new Airport("FRA", "Frankfurt Airport");
-			airportRepository.save(frankfurtAirport);
-
-			Airport tokyoAirport = new Airport("HND", "Haneda Airport");
-			airportRepository.save(tokyoAirport);
-
-			Airport istanbulAirport = new Airport("IST", "Istanbul Airport");
-			airportRepository.save(istanbulAirport);
-
-			Airport amsterdamAirport = new Airport("AMS", "Amsterdam Airport Schiphol");
-			airportRepository.save(amsterdamAirport);
-
-			// Create and save flights
-			Flight flight1 = new Flight("British Airways", newYorkAirport, "BA123");
-			flightRepository.save(flight1);
-
-			Flight flight2 = new Flight("American Airlines", newYorkAirport, "AA456");
-			flightRepository.save(flight2);
-
-			Flight flight3 = new Flight("Virgin Atlantic", londonAirport, "VS789");
-			flightRepository.save(flight3);
-
-			Flight flight4 = new Flight("Emirates", dubaiAirport, "EK124");
-			flightRepository.save(flight4);
-
-			Flight flight5 = new Flight("Lufthansa", frankfurtAirport, "LH234");
-			flightRepository.save(flight5);
-
-			Flight flight6 = new Flight("Qantas", sydneyAirport, "QF345");
-			flightRepository.save(flight6);
-
-			Flight flight7 = new Flight("United Airlines", losAngelesAirport, "UA678");
-			flightRepository.save(flight7);
-
-			Flight flight8 = new Flight("Air France", parisAirport, "AF901");
-			flightRepository.save(flight8);
-
-			Flight flight9 = new Flight("Singapore Airlines", singaporeAirport, "SQ567");
-			flightRepository.save(flight9);
-
-			Flight flight10 = new Flight("Turkish Airlines", istanbulAirport, "TK789");
-			flightRepository.save(flight10);
-
-			Flight flight11 = new Flight("KLM", amsterdamAirport, "KL901");
-			flightRepository.save(flight11);
-
-			Flight flight12 = new Flight("ANA", tokyoAirport, "NH345");
-			flightRepository.save(flight12);
-
-			Flight flight13 = new Flight("Air Canada", torontoAirport, "AC678");
-			flightRepository.save(flight13);
-
-			Flight flight14 = new Flight("China Southern Airlines", beijingAirport, "CZ123");
-			flightRepository.save(flight14);
-
-			Flight flight15 = new Flight("Delta Air Lines", losAngelesAirport, "DL456");
-			flightRepository.save(flight15);
+			// Flights for Frankfurt Airport
+			flightRepository.save(new Flight("Lufthansa", frankfurtAirport, "LH456",
+					LocalDateTime.of(2023, 3, 15, 7, 30), "Gate 23"));
+			flightRepository.save(new Flight("United Airlines", frankfurtAirport, "UA555",
+					LocalDateTime.of(2023, 3, 15, 11, 0), "Gate 32"));
+			flightRepository.save(new Flight("British Airways", frankfurtAirport, "BA678",
+					LocalDateTime.of(2023, 3, 15, 15, 10), "Gate 42"));
+			flightRepository.save(new Flight("Air France", frankfurtAirport, "AF901",
+					LocalDateTime.of(2023, 3, 15, 19, 15), "Gate 51"));
+			flightRepository.save(new Flight("Emirates", frankfurtAirport, "EK884",
+					LocalDateTime.of(2023, 3, 15, 23, 30), "Gate 57"));
 			// Create users: admin/admin user/user
 			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
 			AppUser user2 = new AppUser("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C",

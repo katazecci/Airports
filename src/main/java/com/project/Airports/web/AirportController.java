@@ -39,7 +39,8 @@ public class AirportController {
 	@GetMapping({ "/", "/flightlist" })
 	public String flightList(Model model) {
 		log.info("Get all flights from database");
-		model.addAttribute("flights", flightRepository.findAll());
+		List<Flight> flights = (List<Flight>) flightRepository.findAll();
+		model.addAttribute("flights", flights);
 		return "flightlist";
 	}
 
@@ -72,10 +73,11 @@ public class AirportController {
 		return "redirect:/flightlist";
 	}
 
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/updateflight/{id}")
 	public String updateFlight(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("flight", flightRepository.findById(id));
+		Flight flight = flightRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid flight Id:" + id));
+		model.addAttribute("flight", flight);
 		model.addAttribute("airports", airportRepository.findAll());
 		return "updateflight";
 	}
@@ -87,19 +89,6 @@ public class AirportController {
 		flightRepository.deleteById(flightId);
 		return "redirect:../flightlist";
 	}
-
-	/*
-	 * // RESTful service to get all airports
-	 * 
-	 * @GetMapping(value = "/airports") public @ResponseBody List<Airport>
-	 * airportListRest() { return (List<Airport>) airportRepository.findAll(); }
-	 * 
-	 * // RESTful service to get airport by id
-	 * 
-	 * @GetMapping(value = "/airport/{id}") public @ResponseBody Optional<Airport>
-	 * findAirportRest(@PathVariable("id") Long airportId) { return
-	 * airportRepository.findById(airportId); }
-	 */
 
 	@GetMapping(value = "/airportlist")
 	public String airportList(Model model) {

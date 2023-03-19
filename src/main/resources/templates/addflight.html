@@ -6,28 +6,33 @@
 	<title>Add Flight</title>
 </head>
 <body>
-				<h1>Add a flight</h1>
-		<div class="container">
-			<div class="col-md-4">
-				<form th:object="${flight}" th:action="@{saveflight}" action="#" method="post">
-					
-						<label for="flightNumber">Flight Number:</label>
-						<input type="text" id="flightNumber" name="flightNumber" class="form-control" required="required"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
+	<h1>Add a flight</h1>
+	<div class="container">
+		<div class="col-md-4">
+			<form th:object="${flight}" th:action="@{saveflight}" action="#" method="post">
+				<label for="flightNumber">Flight Number:</label>
+				<input type="text" id="flightNumber" name="flightNumber" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
 
-					<label for="airports">Destination Airport:</label>
-					<select id="airports" th:field="*{airport}" class="form-control" required="required">
-						<option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.name}"></option>
-					</select>
-					<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="airports">Destination Airport:</label>
+				<select id="airports" th:field="*{airport}" class="form-control" required="required">
+					<option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.name}"></option>
+				</select>
+				<div style="clear: both; display: block; height: 10px;"></div>
 
+				<label for="airline">Airline:</label>
+				<input type="text" id="airline" name="airline" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			
+				<label for="departureTime">Departure Time (DD-MM-YYY HH-MM):</label>
+				<input type="datetime-local" id="departureTime" name="departureTime" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
 
-					<label for="airline">Airline:</label>
-					<input type="text" id="airline" name="airline" class="form-control" required="required"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="gate">Gate:</label>
+				<input type="text" id="gate" name="gate" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
 
-
-					<input type="submit" class="btn btn-primary" value="Save"></input>
+				<input type="submit" class="btn btn-primary" value="Save"></input>
 			</form>
 		</div>
 	</div>

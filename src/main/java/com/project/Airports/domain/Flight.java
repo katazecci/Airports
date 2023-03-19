@@ -1,5 +1,6 @@
 package com.project.Airports.domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Flight {
 	private Long id;
 	private String flightNumber;
 	private String airline;
+	private LocalDateTime departureTime;
+	private String gate;
 
 	@ManyToOne
 	@JsonIgnore
@@ -29,11 +32,13 @@ public class Flight {
 	public Flight() {
 	}
 
-	public Flight(String airline, Airport airport, String flightNumber) {
+	public Flight(String airline, Airport airport, String flightNumber, LocalDateTime departureTime, String gate) {
 		super();
 		this.flightNumber = flightNumber;
 		this.airport = airport;
 		this.airline = airline;
+		this.departureTime = departureTime;
+		this.gate = gate;
 	}
 
 	public Long getId() {
@@ -68,6 +73,22 @@ public class Flight {
 		this.flightNumber = flightNumber;
 	}
 
+	public LocalDateTime getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(LocalDateTime departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public String getGate() {
+		return gate;
+	}
+
+	public void setGate(String gate) {
+		this.gate = gate;
+	}
+
 	public static List<String> getAllAirports(List<Flight> flights) {
 		List<String> airports = new ArrayList<>();
 		for (Flight flight : flights) {
@@ -82,10 +103,10 @@ public class Flight {
 	public String toString() {
 		if (this.airport != null)
 			return "Flight [id=" + id + ", airline=" + airline + ", airport=" + this.getAirport() + ", flight number="
-					+ flightNumber + "]";
+					+ flightNumber + ", departure time=" + departureTime + ", gate=" + gate + "]";
 
 		return "Flight [id=" + id + ", airline=" + airline + ", airport=" + airport + ", flight number=" + flightNumber
-				+ "]";
+				+ ", departure time=" + departureTime + ", gate=" + gate + "]";
 	}
 
 }

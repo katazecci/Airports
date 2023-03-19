@@ -25,6 +25,14 @@
 				<label for="airline">Airline:</label>
 				<input type="text" id="airline" name="airline" th:field="*{airline}" class="form-control" required="required"/>
 				<div style="clear: both; display: block; height: 10px;"></div>
+				
+				<label for="gate">Gate Number:</label>
+				<input type="text" id="gate" name="gate" th:field="*{gate}" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			
+				<label for="departureTime">Departure Time:</label>
+				<input type="datetime-local" id="departureTime" name="departureTime" th:field="*{departureTime}" th:value="${flight.departureTime}" class="form-control" required="required"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
 
 				<input type="submit" class="btn btn-primary" value="Save"></input>
 			</form>
