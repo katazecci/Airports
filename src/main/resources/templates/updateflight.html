@@ -18,7 +18,7 @@
 
 				<label for="airports">Destination Airport:</label>
 				<select id="airports" th:field="*{airport}" class="form-control" required="required">
-					<option th:each="airport : ${airports}" th:value="${airport.airportId}" th:selected="${airport.airportId == airportId}" th:text="${airport.name}"></option>
+					<option th:each="airport : ${airports}" th:value="${airport.id}" th:selected="${airport.id == id}" th:text="${airport.name}"></option>
 				</select>
 				<div style="clear: both; display: block; height: 10px;"></div>
 
@@ -31,7 +31,7 @@
 				<div style="clear: both; display: block; height: 10px;"></div>
 			
 				<label for="departureTime">Departure Time:</label>
-				<input type="datetime-local" id="departureTime" name="departureTime" th:field="*{departureTime}" th:value="${flight.departureTime}" class="form-control" required="required"/>
+				<input type="datetime-local" id="departureTime" name="departureTime" th:field="*{departureTime}" th:value="${flight.get().departureTime}" class="form-control" required="required"/>
 				<div style="clear: both; display: block; height: 10px;"></div>
 
 				<input type="submit" class="btn btn-primary" value="Save"></input>

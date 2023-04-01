@@ -37,10 +37,10 @@
 			<tr th:each="airport : ${airports}">
 				<td th:text="${airport.getCode()}"></td>
 				<td th:text="${airport.getName()}"></td>
-				  <td><a th:href="@{/airport/{id}(id=${airport.airportId})}">View Flights</a></td>
+				  <td><a th:href="@{/airport/{id}(id=${airport.id})}">View Flights</a></td>
 				<td sec:authorize="hasAuthority('ADMIN')">
-					<a th:href="@{'/updateairport/' + ${airport.getAirportId()}}" class="btn btn-sm btn-primary">Edit</a>
-					<a th:href="@{'/deleteairport/' + ${airport.getAirportId()}}" class="btn btn-sm btn-danger">Delete</a>
+					<a th:href="@{'/updateairport/' + ${airport.getId()}}" class="btn btn-sm btn-primary">Edit</a>
+					<a th:href="@{'/deleteairport/' + ${airport.getId()}}" class="btn btn-sm btn-danger">Delete</a>
 				</td>
 			</tr>
 		</tbody>

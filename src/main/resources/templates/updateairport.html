@@ -9,7 +9,7 @@
 	<h1>Update Airport</h1>
 	<div class="container">
 			<form th:object="${airport}" th:action="@{/saveairport}" action="#" method="post">
-			<input type="hidden" id="id" th:field="*{airportId}" />
+			<input type="hidden" id="id" th:field="*{id}" />
 			
 		  	<label for="name">Name</label>
 			<input type="text" id="name" th:field="*{name}"/>

@@ -8,12 +8,14 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.project.Airports.domain.Airport;
 import com.project.Airports.domain.AirportRepository;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AirportRepositoryTest {
 
 	@Autowired
@@ -31,13 +33,13 @@ public class AirportRepositoryTest {
 	public void createNewAirport() {
 		Airport airport = new Airport("HEL", "Helsinki Airport");
 		airportRepository.save(airport);
-		assertThat(airport.getAirportId()).isNotNull();
+		assertThat(airport.getId()).isNotNull();
 	}
 
 	@Test
 	public void updateAirport() {
 		Optional<Airport> airport = airportRepository.findById((long) 1);
-		assertNotEquals(airport.get().getAirportId(), null);
+		assertNotEquals(airport.get().getId(), null);
 		airport.get().setName("testi");
 		List<Airport> airports = airportRepository.findByName("testi");
 		assertThat(airports).hasSize(1);
@@ -45,11 +47,11 @@ public class AirportRepositoryTest {
 	}
 
 	@Test
-	public void deleteNewAirport() {
-		List<Airport> airports = airportRepository.findByName("Toronto Pearson International Airport");
+	public void deleteAirport() {
+		List<Airport> airports = airportRepository.findByName("Los Angeles International Airport");
 		Airport airport = airports.get(0);
 		airportRepository.delete(airport);
-		List<Airport> newAirports = airportRepository.findByName("Toronto Pearson International Airport");
+		List<Airport> newAirports = airportRepository.findByName("Los Angeles International Airport");
 		assertThat(newAirports).hasSize(0);
 	}
 

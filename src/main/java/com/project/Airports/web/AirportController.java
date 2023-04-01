@@ -1,6 +1,7 @@
 package com.project.Airports.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import com.project.Airports.domain.Airport;
 import com.project.Airports.domain.AirportRepository;
 import com.project.Airports.domain.Flight;
 import com.project.Airports.domain.FlightRepository;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class AirportController {
@@ -64,7 +68,9 @@ public class AirportController {
 	// Save new flight
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping(value = "/saveflight")
-	public String saveFlight(@Validated Flight flight, BindingResult bindingResult) {
+	public String saveFlight(@Valid @ModelAttribute("flight") Flight flight, BindingResult bindingResult, Model model) {
+		log.info("CONTROLLER: Saved some of the flight - check validation of flight: " + flight);
+		// Check if there are errors based on validation
 		if (bindingResult.hasErrors()) {
 			System.out.println("Some validation error happened");
 			return "/addflight";
@@ -73,10 +79,10 @@ public class AirportController {
 		return "redirect:/flightlist";
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/updateflight/{id}")
 	public String updateFlight(@PathVariable("id") Long id, Model model) {
-		Flight flight = flightRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid flight Id:" + id));
+		Optional<Flight> flight = flightRepository.findById(id);
 		model.addAttribute("flight", flight);
 		model.addAttribute("airports", airportRepository.findAll());
 		return "updateflight";

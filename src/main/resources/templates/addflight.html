@@ -16,7 +16,7 @@
 
 				<label for="airports">Destination Airport:</label>
 				<select id="airports" th:field="*{airport}" class="form-control" required="required">
-					<option th:each="airport : ${airports}" th:value="${airport.airportId}" th:text="${airport.name}"></option>
+					<option th:each="airport : ${airports}" th:value="${airport.Id}" th:text="${airport.name}"></option>
 				</select>
 				<div style="clear: both; display: block; height: 10px;"></div>
 

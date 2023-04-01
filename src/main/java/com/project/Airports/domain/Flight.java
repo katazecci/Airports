@@ -6,12 +6,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Flight {
@@ -19,9 +22,20 @@ public class Flight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotEmpty(message = "flightnumber cannot be empty.")
+	@Size(min = 0, max = 10)
+	@Column(name = "flight_number")
 	private String flightNumber;
+
+	@NotEmpty(message = "airline cannot be empty.")
+	@Size(min = 0, max = 50)
 	private String airline;
+
+	@Column(name = "departure_time")
 	private LocalDateTime departureTime;
+
+	@NotEmpty(message = "gate cannot be empty.")
 	private String gate;
 
 	@ManyToOne
@@ -30,9 +44,11 @@ public class Flight {
 	private Airport airport;
 
 	public Flight() {
+		super();
 	}
 
-	public Flight(String airline, Airport airport, String flightNumber, LocalDateTime departureTime, String gate) {
+	public Flight(@NotEmpty(message = "flight has to have an arriving airport.") Airport airport, String airline,
+			String flightNumber, LocalDateTime departureTime, String gate) {
 		super();
 		this.flightNumber = flightNumber;
 		this.airport = airport;

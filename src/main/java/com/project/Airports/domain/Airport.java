@@ -2,26 +2,35 @@ package com.project.Airports.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Airport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long airportId;
+	private Long id;
+
+	@Size(min = 3, max = 3)
 	private String code;
+
+	@Size(min = 1, max = 255)
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "airport")
+	@JsonIgnore
 	private List<Flight> flights;
 
 	public Airport() {
+		super();
 	}
 
 	public Airport(String code, String name) {
@@ -30,12 +39,12 @@ public class Airport {
 		this.name = name;
 	}
 
-	public Long getAirportId() {
-		return airportId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setAirportId(Long airportId) {
-		this.airportId = airportId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCode() {
@@ -64,7 +73,7 @@ public class Airport {
 
 	@Override
 	public String toString() {
-		return "Airport [id=" + airportId + ", code=" + code + ", name=" + name + "]";
+		return "Airport [id=" + id + ", code=" + code + ", name=" + name + "]";
 
 	}
 
