@@ -37,3 +37,9 @@ Thymeleaf
 MariaDB
 Spring Security
 JUnit
+
+## User view example
+![image](https://user-images.githubusercontent.com/103991239/230725578-06d98b11-53d4-44e4-822c-24bcae335265.png)
+
+## Admin view example
+![image](https://user-images.githubusercontent.com/103991239/230725637-68ceee28-86b4-4ab5-aaac-b5053bd14ef2.png)
