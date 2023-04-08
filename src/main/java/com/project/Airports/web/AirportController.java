@@ -139,22 +139,4 @@ public class AirportController {
 		return "redirect:/airportlist";
 	}
 
-	// Add new flight
-
-	/*
-	 * // Show all flights for a specific airport
-	 *
-	 * 
-	 * // RESTful service to get all flights
-	 * 
-	 * @GetMapping(value = "/flights") public @ResponseBody List<Flight>
-	 * flightListRest() { return (List<Flight>) flightRepository.findAll(); }
-	 * 
-	 * // RESTful service to get flight by id
-	 * 
-	 * @GetMapping(value = "/flight/{id}") public @ResponseBody Optional<Flight>
-	 * findFlightRest(@PathVariable("id") Long flightId) { return
-	 * flightRepository.findById(flightId); }
-	 */
-
 }
