@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.project.Airports.domain.AppUser;
 import com.project.Airports.domain.AppUserRepository;
-import com.project.Airports.domain.UserRegistration;
+import com.project.Airports.service.UserRegistration;
 
 import jakarta.validation.Valid;
 
