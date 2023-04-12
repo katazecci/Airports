@@ -31,7 +31,7 @@ public class FlightRepositoryTest {
 	public void findFlightByAirlineReturnsFlightnumber() {
 		List<Flight> flights = flightRepository.findByAirline("American Airlines");
 		assertThat(flights).hasSizeGreaterThanOrEqualTo(1);
-		assertThat(flights.get(0).getFlightNumber()).isEqualTo("AA101");
+		assertThat(flights.get(0).getFlightNumber()).isEqualTo("AA404");
 	}
 
 	@Test
@@ -52,10 +52,10 @@ public class FlightRepositoryTest {
 
 	@Test
 	public void editFlight() {
-		Optional<Flight> flight = flightRepository.findById((long) 1);
+		Optional<Flight> flight = flightRepository.findById((long) 2);
 		assertThat(flight.get().getId()).isNotNull();
 		flight.get().setFlightNumber("AA222");
-		List<Flight> flights = flightRepository.findByFlightNumber("AA101");
+		List<Flight> flights = flightRepository.findByFlightNumber("UA202");
 		assertThat(flights).hasSize(0);
 	}
 

@@ -34,6 +34,7 @@
 				<th>Departure time</th>
 				<th>Airline</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +48,7 @@
 					<span sec:authorize="hasAuthority('ADMIN')">
 						<a th:href="@{/updateflight/{id}(id=${flight.id})}" class="btn btn-sm btn-info">Edit</a>
 						<a th:href="@{/deleteflight/{id}(id=${flight.id})}" class="btn btn-sm btn-danger">Delete</a>
+						<a th:href="@{/passengers/{id}(id=${flight.id})}" class="btn btn-sm btn-info">View Passengers</a>		
 					</span>
 				</td>
 			</tr>

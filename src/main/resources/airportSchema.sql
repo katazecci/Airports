@@ -1,6 +1,8 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS airport;
+DROP TABLE IF EXISTS passenger;
+DROP TABLE IF EXISTS passenger_flight;
 DROP TABLE IF EXISTS flight;
 DROP TABLE IF EXISTS application_user;
 
@@ -67,6 +69,55 @@ INSERT INTO flight (flight_number, airline, departure_time, gate, airportid) VAL
     ('AC2828', 'Air Canada', '2023-04-01 17:15:00', 'B28', 10),
     ('BA2929', 'British Airways', '2023-04-01 19:15:00', 'C29', 10),
     ('UA3030', 'United Airlines', '2023-04-01 21:15:00', 'D30', 10);
+    
+    CREATE TABLE passenger (
+id BIGINT NOT NULL AUTO_INCREMENT,
+name VARCHAR(255) NOT NULL,
+PRIMARY KEY (id)
+);
+
+INSERT INTO passenger (name) VALUES
+('Mirjami Mikkola'),
+('Terho Korhi'),
+('Ville Valo'),
+('Sanna Marin'),
+('Jasper Paakkonen'),
+('Olli Halonen'),
+('Aino Virtanen'),
+('Elina Kärkkäinen'),
+('Hannu Nieminen'),
+('Jenni Vartiainen'),
+('Kaisa Mäntylä'),
+('Lauri Ylönen'),
+('Maija Lehtonen'),
+('Niilo Tuominen'),
+('Oskari Saarinen'),
+('Pirjo Niskanen');
+
+
+CREATE TABLE passenger_flight (
+  passenger_id BIGINT NOT NULL,
+  flight_id BIGINT NOT NULL,
+  PRIMARY KEY (passenger_id, flight_id),
+  FOREIGN KEY (passenger_id) REFERENCES passenger(id) ON DELETE CASCADE,
+  FOREIGN KEY (flight_id) REFERENCES flight(id) ON DELETE CASCADE
+);
+
+INSERT INTO passenger_flight (passenger_id, flight_id) VALUES
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 2),
+(5, 3),
+(6, 3),
+(7, 1),
+(8, 1),
+(9, 2),
+(10, 2),
+(11, 3),
+(12, 3);
+    
+
     
 CREATE TABLE application_user (
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <title>Passengers on a flight</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Passengers</h1>
+            </div>
+            <div class="col-md-4 col-md-offset-4" style="padding:20px 0">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Passengers name</th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr th:each="passenger : ${passengers}">
+				    <td th:text="${passenger.getName()}"></td>
+				</tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -42,6 +43,9 @@ public class Flight {
 	@JsonIgnore
 	@JoinColumn(name = "airportid") //
 	private Airport airport;
+
+	@ManyToMany(mappedBy = "flights")
+	private List<Passenger> passengers;
 
 	public Flight() {
 		super();
@@ -103,6 +107,15 @@ public class Flight {
 
 	public void setGate(String gate) {
 		this.gate = gate;
+	}
+
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
+
 	}
 
 	public static List<String> getAllAirports(List<Flight> flights) {

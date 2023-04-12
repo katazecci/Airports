@@ -21,6 +21,7 @@ import com.project.Airports.domain.Airport;
 import com.project.Airports.domain.AirportRepository;
 import com.project.Airports.domain.Flight;
 import com.project.Airports.domain.FlightRepository;
+import com.project.Airports.domain.Passenger;
 
 import jakarta.validation.Valid;
 
@@ -37,6 +38,16 @@ public class AirportController {
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
+	}
+
+	@GetMapping("/passengers/{id}")
+	public String viewPassengers(@PathVariable("id") Long flightId, Model model) {
+		Optional<Flight> flight = flightRepository.findById(flightId);
+		List<Passenger> passengers = flight.get().getPassengers();
+		model.addAttribute("flight", flight);
+		model.addAttribute("passengers", passengers);
+		return "passengerlist";
+
 	}
 
 	// Show all flights
